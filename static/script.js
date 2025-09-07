@@ -115,6 +115,8 @@ document.addEventListener('DOMContentLoaded', () => {
         setupScreen.style.display = 'flex';
         gameContainer.style.display = 'none';
     });
+    resetButton.addEventListener('click', resetGame);
+    resetScoreButton.addEventListener('click', resetScore);
 
     // --- Initial Load ---
     fetch('/state').then(res => res.json()).then(updateUI);
