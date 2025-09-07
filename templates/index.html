@@ -1,0 +1,51 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect X</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- NEW: A setup screen that shows first -->
+    <div id="setup-screen">
+        <h2>Game Setup</h2>
+        <div class="setup-option">
+            <label>Number of Players:</label>
+            <div class="radio-group">
+                <input type="radio" id="p2" name="players" value="2" checked><label for="p2">2</label>
+                <input type="radio" id="p3" name="players" value="3"><label for="p3">3</label>
+                <input type="radio" id="p4" name="players" value="4"><label for="p4">4</label>
+            </div>
+        </div>
+        <div class="setup-option">
+            <label>Connect How Many to Win?</label>
+            <div class="radio-group">
+                <input type="radio" id="c3" name="connect" value="3"><label for="c3">3</label>
+                <input type="radio" id="c4" name="connect" value="4" checked><label for="c4">4</label>
+            </div>
+        </div>
+        <button id="start-game-button">Start Game</button>
+    </div>
+
+    <!-- NEW: A container for the main game, hidden by default -->
+    <div id="game-container">
+        <h1 id="game-title">Connect 4</h1>
+        <div id="scoreboard">
+            <!-- Scoreboard will be built by JavaScript -->
+        </div>
+        <div id="game-info">
+            <h2 id="message">Loading...</h2>
+            <div class="button-group">
+                <button id="reset-button">New Game</button>
+                <button id="reset-score-button">Reset Score</button>
+            </div>
+        </div>
+        <div id="board"></div>
+        <button id="back-to-setup-button">Change Settings</button>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

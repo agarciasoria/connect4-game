@@ -1,0 +1,120 @@
+/* static/style.css */
+:root {
+    /* We only need the cols variable now */
+    --cols: 7;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* --- Setup Screen Styles --- */
+#setup-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.setup-option {
+    margin: 15px 0;
+    text-align: center;
+}
+.setup-option label {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    display: block;
+}
+.radio-group label {
+    display: inline-block;
+    margin: 0 10px;
+    font-size: 1.1em;
+}
+#start-game-button {
+    margin-top: 20px;
+    padding: 12px 25px;
+    font-size: 1.2em;
+    cursor: pointer;
+    border: none;
+    background-color: #28a745;
+    color: white;
+    border-radius: 5px;
+}
+
+/* --- Game Container --- */
+#game-container {
+    display: none; /* Hidden by default */
+    flex-direction: column;
+    align-items: center;
+}
+
+/* --- Scoreboard & Game Info --- */
+#scoreboard {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+.score {
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: white;
+}
+#score-1 { background-color: #DC143C; } /* Red */
+#score-2 { background-color: #FFD700; } /* Gold */
+#score-3 { background-color: #007bff; } /* Blue */
+#score-4 { background-color: #28a745; } /* Green */
+
+#game-info { text-align: center; margin-bottom: 20px; }
+#message { font-size: 1.5em; height: 30px; }
+.button-group { display: flex; gap: 10px; justify-content: center; margin-top: 10px; }
+#reset-button, #reset-score-button, #back-to-setup-button { padding: 10px 20px; font-size: 1em; cursor: pointer; border: none; color: white; border-radius: 5px; }
+#reset-button { background-color: #007bff; }
+#reset-score-button { background-color: #6c757d; }
+#back-to-setup-button { background-color: #ffc107; color: black; margin-top: 20px;}
+
+/* --- Board & Cells --- */
+#board {
+    display: grid;
+    grid-template-columns: repeat(var(--cols), min(7vw, 80px)); /* Use 7% of viewport width, but no more than 80px */
+    background-color: #003366;
+    border: 10px solid #002244;
+    border-radius: 10px;
+    padding: 1vw;
+    gap: 1vw;
+}
+.column { overflow: hidden; }
+.cell {
+    width: min(7vw, 80px); /* Match the width */
+    height: min(7vw, 80px); /* Match the height to keep it a circle */
+    background-color: #f0f0f0;
+    border-radius: 50%;
+    position: relative;
+}
+.column:hover .cell:not(.red):not(.gold):not(.blue):not(.green) { background-color: #dcdcdc; cursor: pointer; }
+
+@keyframes drop-in {
+    from { transform: translateY(-800px); } /* NEW, larger value to clear the tallest board */
+    to { transform: translateY(0); }
+}
+.cell.red::before, .cell.gold::before, .cell.blue::before, .cell.green::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    animation: drop-in 0.4s ease-in forwards;
+}
+.cell.red::before { background-color: #DC143C; }
+.cell.gold::before { background-color: #FFD700; }
+.cell.blue::before { background-color: #007bff; }
+.cell.green::before { background-color: #28a745; }
